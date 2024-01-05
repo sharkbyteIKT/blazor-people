@@ -1,0 +1,91 @@
+
+@using DataLibrary
+@using BlazorServer.Models
+@using Microsoft.Extensions.Configuration
+@inject IJSRuntime JsRuntime
+@inject IDataAccess _data
+@inject IConfiguration _config
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+
+@page "/custom/"
+
+<Splitter Style="height: 90vh;">
+    <SplitterSection>
+        <RichTextEdit @ref="richTextEditRef"
+              Theme="RichTextEditTheme.Snow"
+              ContentChanged="@OnContentChanged"
+              ReadOnly="@readOnly"
+              SubmitOnEnter="false"
+              Style="height: 80%"
+          ToolbarPosition="Placement.Top">
+            <Editor></Editor>
+            <Toolbar>
+                <RichTextEditToolbarGroup Float="Float.Start">
+                    <Button Clicked="@OnDownload"><Icon Name="IconName.CloudDownloadAlt" /></Button>
+                    <Button Clicked="@OnUpload"><Icon Name="IconName.CloudUploadAlt" /></Button>
+                </RichTextEditToolbarGroup>
+            </Toolbar>
+        </RichTextEdit>
+    </SplitterSection>
+    <SplitterSection>
+        @if (rows == null)
+        {
+            <p>@queryStatus</p>
+        }
+        else
+        {
+
+            <table class="table">
+            <thead>
+                    @foreach (string colName in colNames)
+                    {
+                        <th>@colName</th>
+                    }
+            </thead>
+            <tbody>
+
+            @foreach(var record in rows)
+            {
+                <tr>
+                    @foreach(string col in record)
+                    {
+                        <td>@col</td>
+                    }
+                </tr>
+
+            }
+            </tbody>
+            </table>
+        }
+    </SplitterSection>
+</Splitter>
+@code {
+    string queryStatus = "No Query";
+    List<string> colNames;
+    List<List<string>> rows;
+
+    protected RichTextEdit? richTextEditRef;
+    protected bool readOnly;
+    protected string contentAsText;
+
+    public async Task OnContentChanged()
+    {
+        contentAsText = await richTextEditRef.GetTextAsync();
+    }
+
+    public async Task OnDownload()
+    {
+        string sql = contentAsText;
+        rows = await _data.LoadData2DList(sql, _config.GetConnectionString("default"));
+        colNames = rows.First();
+        rows.RemoveAt(0);
+    }
+
+    public async Task OnUpload()
+    {
+        string sql = contentAsText;
+        int result = await _data.SaveData(sql, new { }, _config.GetConnectionString("default"));
+        queryStatus = result + " rows affected.";
+        rows = null;
+    }
+}

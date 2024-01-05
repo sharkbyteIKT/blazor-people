@@ -1,0 +1,93 @@
+﻿@page "/insert"
+
+@using DataLibrary
+@using BlazorServer.Models
+@using Microsoft.Extensions.Configuration
+@inject IJSRuntime JsRuntime
+@inject IDataAccess _data
+@inject IConfiguration _config
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+
+<h3>Insert</h3>
+
+
+@if (people == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+
+            
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>
+                    <input type="text" @bind="@FirstName" @oninput="@((e) => { FirstName=(string)e.Value;})">
+                </td>
+                <td>
+                    <input type="text" @bind="@LastName" @oninput="@((e) => { LastName=(string)e.Value;})">
+                </td>
+                <td>
+                    <button class="btn btn-primary" @onclick="@(()=> InsertData(@FirstName, @LastName))">Insert</button>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in people)
+            {
+                <tr>
+                    <td>@person.id</td>
+                    <td>@person.FirstName</td>
+                    <td>@person.LastName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+
+
+    @code {
+    string FirstName = "";
+    string LastName = "";
+
+    List<PersonModel> people;
+
+    private async Task InsertData(string FirstName, string LastName)
+    {
+        string sql = "INSERT INTO people(FirstName, LastName) " +
+                        "VALUES(@FirstName, @LastName);";
+        await _data.SaveData(sql, new { FirstName = Capitalize(FirstName), LastName = Capitalize(LastName) }, _config.GetConnectionString("default"));
+
+        await OnInitializedAsync();
+
+        navigationManager.NavigateTo("/insert/", forceLoad: true);
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        string sql = "SELECT * FROM people";
+
+        people = await _data.LoadData<PersonModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
+    }
+
+    string Capitalize(string str)
+    {
+        if (str.Length == 0)
+            return "";
+        else if (str.Length == 1)
+            return char.ToUpper(str[0]).ToString();
+        else
+            return char.ToUpper(str[0]) + str.Substring(1);
+    }
+}
+}

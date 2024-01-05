@@ -1,0 +1,21 @@
+﻿@page "/example"
+
+<input type="text" value="@firstName" @oninput="OnInputFirstName" />
+
+<input type="text" value="@lastName" @oninput="OnInputLastName" />
+
+<p>@firstName @lastName</p>
+
+@code {
+    private string firstName = "";
+    private string lastName = "";
+
+    private void OnInputFirstName(ChangeEventArgs e)
+    {
+        firstName = e.Value.ToString();
+    }
+    private void OnInputLastName(ChangeEventArgs e)
+    {
+        lastName = e.Value.ToString();
+    }
+}

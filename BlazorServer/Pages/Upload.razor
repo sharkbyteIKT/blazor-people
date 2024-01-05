@@ -1,0 +1,51 @@
+﻿@page "/upload/"
+
+@using System.IO
+@using System.Diagnostics
+@inject IConfiguration config
+
+
+<h2>Upload File</h2>
+
+<InputFile OnChange="@LoadFiles"/>
+
+@if (errors.Count > 0)
+{
+	<ul class="text-danger">
+		@foreach(var error in errors)
+		{
+			<li>@error</li>
+		}
+	</ul>
+}
+@if (messages.Count > 0)
+{
+	<ul class="text-info">
+		@foreach (var message in messages)
+		{
+			<li>@message</li>
+		}
+	</ul>
+}
+@code {
+	private List<string> errors = new();
+	private List<string> messages = new();
+
+	private async Task LoadFiles(InputFileChangeEventArgs e)
+	{
+		errors.Clear();
+		messages.Clear();
+		if (Path.GetExtension(e.File.Name) != ".xlsx") { errors.Add("Wrong File Type. File type should be \".xlsx\"."); return; }
+		else
+		{
+			if (File.Exists(config.GetValue<string>("ExcelFile")))
+			{
+				File.Delete(config.GetValue<string>("ExcelFile"));
+			}
+			await using FileStream fs = new(config.GetValue<string>("ExcelFile"), FileMode.Create);
+			await e.File.OpenReadStream().CopyToAsync(fs);
+			messages.Add("File Uploaded!");
+			//Process.Start("cmd.exe", "C:\\Users\\TobiasVedøy\\AppData\\Local\\Programs\\UiPath\\Studio\\UiRobot.exe execute --file \"C:\\Users\\TobiasVedøy\\Documents\\UiPath\\document portal\\document.portal.1.0.2.nupkg\"");
+		}
+	}
+}

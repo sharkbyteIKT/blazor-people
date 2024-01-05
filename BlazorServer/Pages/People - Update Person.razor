@@ -1,0 +1,102 @@
+﻿@page "/updateperson/{param}"
+
+@using DataLibrary
+@using BlazorServer.Models
+@using Microsoft.Extensions.Configuration
+@inject IJSRuntime JsRuntime
+@inject IDataAccess _data
+@inject IConfiguration _config
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+
+<h3>Update</h3>
+
+
+@if (people == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    OnInitializedAsync();
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in people)
+            {
+                <tr>
+                    <td>Old Info</td>
+                    <td>@person.FirstName</td>
+                    <td>@person.LastName</td>
+                </tr>
+            }
+        </tbody>
+            <tr>
+                <td>
+                    New Info
+                </td>
+                <td>
+                    <input type="text" @bind="@FirstName" @oninput="@((e) => { FirstName=(string)e.Value;})">
+                </td>
+                <td>
+                    <input type="text" @bind="@LastName" @oninput="@((e) => { LastName=(string)e.Value;})">
+                </td>
+                <td>
+                    <button class="btn btn-primary" @onclick="@(()=> UpdateData(@FirstName, @LastName))">Insert</button>
+                </td>
+            </tr>
+    </table>
+    
+}
+
+@code {
+
+
+    [Parameter] public string param { get; set; }
+    string FirstName = "";
+    string LastName = "";
+
+    string sql = "";
+
+    public string id = "";
+    List<PersonModel> people;
+
+    protected override void OnParametersSet()
+    {
+        id = param;
+    }
+    private async Task UpdateData(string FirstName, string LastName)
+    {
+        if (FirstName != "" && LastName != "") sql = "UPDATE people SET FirstName = @FirstName, LastName = @LastName WHERE id = @id";
+        else if (FirstName != "" && LastName == "") sql = "UPDATE people SET FirstName = @FirstName WHERE id = @id";
+        else if (FirstName == "" && LastName != "") sql = "UPDATE people SET LastName = @LastName WHERE id = @id";
+
+        await _data.SaveData(sql, new { FirstName = Capitalize(@FirstName), LastName = Capitalize(@LastName), id = id }, _config.GetConnectionString("default"));
+
+        await OnInitializedAsync();
+
+        FirstName = "";
+        LastName = "";
+
+        navigationManager.NavigateTo("/update/");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        sql = "SELECT * FROM people WHERE id = @id";
+        people = await _data.LoadData<PersonModel, dynamic>(sql, new { id = id }, _config.GetConnectionString("default"));
+    }
+    string Capitalize(string str)
+    {
+        if (str.Length == 0)
+            return "";
+        else if (str.Length == 1)
+            return char.ToUpper(str[0]).ToString();
+        else
+            return char.ToUpper(str[0]) + str.Substring(1);
+    }
+}

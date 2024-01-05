@@ -1,0 +1,79 @@
+﻿@page "/"
+
+@using DataLibrary
+@using BlazorServer.Models
+@using Microsoft.Extensions.Configuration
+@inject IJSRuntime JsRuntime
+@inject IDataAccess _data
+@inject IConfiguration _config
+
+<h3>People</h3>
+
+@if (people == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+                        <tr>
+                <td></td>
+                <td><input type="text" value="@FirstName" @oninput="OnInputFirstName" /></td>
+                <td><input type="text" value="@LastName" @oninput="OnInputLastName" /></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in people)
+            {
+                <tr>
+                    <td>@person.id</td>
+                    <td>@person.FirstName</td>
+                    <td>@person.LastName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+}
+
+@code {
+    string FirstName = "";
+    string LastName = "";
+    string sql = "";
+
+
+    List<PersonModel> people;
+
+
+    async void OnInputFirstName(ChangeEventArgs e)
+    {
+        FirstName = e.Value.ToString();
+        await UpdateSearchAsync();
+    }
+
+    async void OnInputLastName(ChangeEventArgs e)
+    {
+        LastName = e.Value.ToString();
+        await UpdateSearchAsync();
+    }
+
+    async Task UpdateSearchAsync()
+    {
+        sql = $"SELECT id, FirstName, LastName FROM people WHERE FirstName LIKE '{FirstName}%' AND LastName LIKE '{LastName}%'";
+        people = await _data.LoadData<PersonModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        sql = "SELECT id, FirstName, LastName FROM people";
+
+        people = await _data.LoadData<PersonModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
+    }
+}

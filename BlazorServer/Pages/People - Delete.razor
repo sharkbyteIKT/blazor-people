@@ -1,0 +1,97 @@
+﻿@page "/delete"
+
+@using DataLibrary
+@using BlazorServer.Models
+@using Microsoft.Extensions.Configuration
+@inject IJSRuntime JsRuntime
+@inject IDataAccess _data
+@inject IConfiguration _config
+@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
+
+
+<h3>Delete</h3>
+
+
+@if (people == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="text" value="@FirstName" @oninput="OnInputFirstName" /></td>
+                <td><input type="text" value="@LastName" @oninput="OnInputLastName" /></td>
+                <td>
+                </td>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var person in people)
+            {
+                <tr>
+                    <td>@person.id</td>
+                    <td>@person.FirstName</td>
+                    <td>@person.LastName</td>
+                        <td><button class="btn btn-primary" @onclick="@(() => DeleteData(@person.id))">Delete</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    List<PersonModel>? people;
+
+    string? FirstName = "";
+    string? LastName = "";
+
+    string sql = "";
+
+    private async void DeleteData(int id)
+    {
+        if (await JsRuntime.InvokeAsync<bool>("confirm", "Are you sure?")){
+            string sql = "DELETE FROM people WHERE id = @id"; 
+
+
+            await _data.SaveData(sql, new { id = @id.ToString() }, _config.GetConnectionString("default"));
+            await OnInitializedAsync();
+            navigationManager.NavigateTo("/delete/", forceLoad: true);
+        }
+    }
+
+    async void OnInputFirstName(ChangeEventArgs e)
+    {
+        FirstName = e.Value.ToString();
+        await UpdateSearchAsync();
+    }
+
+    async void OnInputLastName(ChangeEventArgs e)
+    {
+        LastName = e.Value.ToString();
+        await UpdateSearchAsync();
+    }
+
+    async Task UpdateSearchAsync()
+    {
+        sql = $"SELECT id, FirstName, LastName FROM people WHERE FirstName LIKE '{FirstName}%' AND LastName LIKE '{LastName}%'";
+        people = await _data.LoadData<PersonModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        string sql = "SELECT * FROM people";
+        people = await _data.LoadData<PersonModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
+    }
+
+}

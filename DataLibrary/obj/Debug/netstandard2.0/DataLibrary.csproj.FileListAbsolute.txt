@@ -1,0 +1,40 @@
+C:\Users\TobiasVedøy\Downloads\ConnectingToMySQLSourceCode\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.deps.json
+C:\Users\TobiasVedøy\Downloads\ConnectingToMySQLSourceCode\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.dll
+C:\Users\TobiasVedøy\Downloads\ConnectingToMySQLSourceCode\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.pdb
+C:\Users\TobiasVedøy\Downloads\ConnectingToMySQLSourceCode\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csproj.AssemblyReference.cache
+C:\Users\TobiasVedøy\Downloads\ConnectingToMySQLSourceCode\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TobiasVedøy\Downloads\ConnectingToMySQLSourceCode\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfoInputs.cache
+C:\Users\TobiasVedøy\Downloads\ConnectingToMySQLSourceCode\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfo.cs
+C:\Users\TobiasVedøy\Downloads\ConnectingToMySQLSourceCode\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csproj.CoreCompileInputs.cache
+C:\Users\TobiasVedøy\Downloads\ConnectingToMySQLSourceCode\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.dll
+C:\Users\TobiasVedøy\Downloads\ConnectingToMySQLSourceCode\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.pdb
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\blazorsql2-main\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.deps.json
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\blazorsql2-main\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.dll
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\blazorsql2-main\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.pdb
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\blazorsql2-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csproj.AssemblyReference.cache
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\blazorsql2-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\blazorsql2-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfoInputs.cache
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\blazorsql2-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfo.cs
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\blazorsql2-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csproj.CoreCompileInputs.cache
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\blazorsql2-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.dll
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\blazorsql2-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.pdb
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\net7 test\BlazorServer\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.deps.json
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\net7 test\BlazorServer\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.dll
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\net7 test\BlazorServer\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.pdb
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\net7 test\BlazorServer\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csproj.AssemblyReference.cache
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\net7 test\BlazorServer\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\net7 test\BlazorServer\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfoInputs.cache
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\net7 test\BlazorServer\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfo.cs
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\net7 test\BlazorServer\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csproj.CoreCompileInputs.cache
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\net7 test\BlazorServer\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.dll
+C:\Users\TobiasVedøy\Documents\blazor\blazorise test\net7 test\BlazorServer\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.pdb
+C:\Users\TobiasVedøy\Downloads\customsqlblazor-main\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.deps.json
+C:\Users\TobiasVedøy\Downloads\customsqlblazor-main\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.dll
+C:\Users\TobiasVedøy\Downloads\customsqlblazor-main\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.pdb
+C:\Users\TobiasVedøy\Downloads\customsqlblazor-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csproj.AssemblyReference.cache
+C:\Users\TobiasVedøy\Downloads\customsqlblazor-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TobiasVedøy\Downloads\customsqlblazor-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfoInputs.cache
+C:\Users\TobiasVedøy\Downloads\customsqlblazor-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfo.cs
+C:\Users\TobiasVedøy\Downloads\customsqlblazor-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csproj.CoreCompileInputs.cache
+C:\Users\TobiasVedøy\Downloads\customsqlblazor-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.dll
+C:\Users\TobiasVedøy\Downloads\customsqlblazor-main\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.pdb
